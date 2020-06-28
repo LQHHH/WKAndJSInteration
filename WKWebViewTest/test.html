@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <title>WK与JS交互</title>
+            <script type="text/javascript" src="test.js"></script>
+            <style type="text/css">
+                .content {
+                    background-color: red;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                    height: 150px;
+                    text-align: center;
+                    padding-top: 15px;
+                }
+            .showAlert {
+                display:inline-block;
+                width: 360px;
+                height: 120px;
+                font-size: 35px;
+            }
+            .content1 {
+                background-color: yellow;
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-top: 10px;
+                height: 150px;
+                text-align: center;
+                padding-top: 15px;
+            }
+            .clickOC {
+                display:inline-block;
+                width: 360px;
+                height: 120px;
+                font-size: 35px;
+            }
+            .content2 {
+                background-color: blue;
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-top: 10px;
+                height: 150px;
+                text-align: center;
+                padding-top: 15px;
+            }
+            .receiveFromOC {
+                display:inline-block;
+                width: 400px;
+                height: 120px;
+                font-size: 35px;
+            }
+            </style>
+            <script type="text/javascript">
+                $(function() {
+                  $(".showAlert").click(function() {
+                    alert("我弹出来了");
+                    })
+                  $(".clickOC").click(function() {
+                      window.webkit.messageHandlers.OCHandler.postMessage({
+                           "age": 10,
+                           "name": "xiaoming"
+                                                    
+                        });
+                    })
+                  $(".receiveFromOC").click(function() {
+                    window.webkit.messageHandlers.OCHandler1.postMessage({
+                         "a": 10,
+                         "b": 100
+                                                  
+                      });
+                  })
+                  })
+                  function show(result) {
+                      alert("10+100="+result);
+                  }
+            </script>
+    </head>
+    <body>
+        <div class="content">
+            <input type="button" class="showAlert" value="弹出网页alert框" />
+        </div>
+        
+        <div class="content1">
+            <input type="button" class="clickOC" value="JS调用OC方法" />
+        </div>
+        
+        <div class="content2">
+            <input type="button" class="receiveFromOC" value="OC调用JS" />
+        </div>
+        
+    </body>
+</html>
